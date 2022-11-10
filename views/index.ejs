@@ -1,0 +1,12 @@
+<h1>Mini-Messageboard</h1>
+  <div>
+    <% users.forEach(user => { %>
+      <div class="messageContainer">
+        <h2><%= user.userName %></h2>
+        <p><%= user.name %></p>
+        <p><%= user.birthday %></p>
+        <p><%= user.status %></p>
+      </div>
+   <% }); %> 
+   <a href="/new">Add New User</a>
+  </div>

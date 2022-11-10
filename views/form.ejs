@@ -1,0 +1,31 @@
+<form method="POST" action="/new" enctype="multipart/form-data">
+  <h2>Welcome New User!</h2>
+
+  <div>
+    <label>Name:</label>
+    <input type="text" name="name" id="name"/>
+  </div>
+  
+  <div>
+    <label>Create Username:</label>
+    <input type="text" name="userName" id="userName"/>
+  </div>
+  
+  <div>
+    <label>Birthday</label>
+    <input type="date" name="birthday"
+        value="<%= user.birthday == null ? '' : user.birthday.toISOString().split('T')[0] %>">
+  </div>
+  
+  <div>
+    <label>Password:</label>
+    <input type="text" name="password" id="password" placeholder="Under 5 letter nouns please."/>
+  </div>
+  
+  <div>
+    <label>Status:</label>
+    <input type="textarea" name="messageText" id="input"/>
+  </div>
+  
+  <button type="submit">Submit</button>
+</form>
