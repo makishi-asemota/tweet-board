@@ -25,7 +25,7 @@ app.get("/new", function (req, res) {
 });
 
 //Create User Route
-app.post("/", upload.none(), async (req, res) => {
+app.post("/", async (req, res) => {
   const user = new User({
     name: req.body.name,
     userName: req.body.userName,
