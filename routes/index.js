@@ -38,7 +38,7 @@ app.post("/new", async (req, res) => {
   } catch {
     res.render("form", {
       user: user,
-      errorMessage: "Error creating User",
+      errorMessage: "Error creating User :(",
     });
   }
 });
@@ -69,7 +69,7 @@ app.put("/:id/edit", async (req, res) => {
       res.redirect("/");
     }
     res.render("edit", {
-      errorMessage: "Error editing user",
+      errorMessage: "Error editing user :(",
     });
   }
 });

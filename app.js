@@ -28,6 +28,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 app.use(methodOverride("_method"));
+app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
+app.use(express.static(__dirname + "/public"));
 
 // Connect Mongoose and MongoDB
 const mongoose = require("mongoose");

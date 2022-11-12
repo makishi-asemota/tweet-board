@@ -1,21 +1,51 @@
-<form method="POST" action="/new" >
-  <h2>Welcome New User!</h2>
-  <%- include('partials/error') %> 
-  <div>
-    <label>Create Username:</label>
-    <input type="text" name="userName" value="<%= user.userName %>"/>
-  </div>
-  
-  <div>
-    <label>Password:</label>
-    <input type="text" name="password" value="<%= user.password %>" placeholder="Under 5 letter nouns please."/>
-  </div>
-  
-  <div>
-    <label>Status:</label>
-    <input type="textarea" name="status" value="<%= user.status %>"/>
-  </div>
-  
-  <a href="/">Cancel</a>
-  <button type="submit">Submit</button>
-</form>
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+<html>
+
+  <body class="bg-warning userPage">
+    <div class="bg-light text-dark rounded formContainer">
+      <form method="POST" action="/new" class="userForm" >
+        <h2 class="text-center text-primary formTitle">Welcome New User!</h2>
+        
+        <!-- <div>
+          <label>Create Username:</label>
+          <input type="text" name="userName" value="<%= user.userName %>"/>
+        </div>
+      
+        
+        <div>
+          <label>Password:</label>
+          <input type="text" name="password" value="<%= user.password %>" placeholder="Under 5 letter nouns please."/>
+        </div>
+        
+        <div>
+          <label>Status:</label>
+          <input type="textarea" name="status" value="<%= user.status %>"/>
+        </div> -->
+        
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">@</span>
+          <input name="userName" type="text" class="form-control" placeholder="Create Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+      
+        <div class="mb-3">
+          <input name="password" class="form-control" id="exampleFormControlInput1" placeholder="Create Password">
+        </div>
+      
+        <div class="mb-3">
+          <textarea name="status" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="What's on your mind?"></textarea>
+        </div>
+      
+        <div class="col-12 text-center buttons">
+          <button class="btn btn-danger" type="submit"><a href="/">Cancel</a></button>
+          <button class="btn btn-primary" type="submit">Create User</button>
+        </div>
+
+        <div class="text-center">
+          <h4 class="text-danger"><%- include('partials/error') %> </h4>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
