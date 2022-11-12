@@ -25,11 +25,9 @@ app.get("/new", function (req, res) {
 });
 
 //Create User Route
-app.post("/", async (req, res) => {
+app.post("/new", async (req, res) => {
   const user = new User({
-    name: req.body.name,
     userName: req.body.userName,
-    birthday: new Date(req.body.birthday),
     password: req.body.password,
     status: req.body.status,
   });
@@ -42,6 +40,55 @@ app.post("/", async (req, res) => {
       user: user,
       errorMessage: "Error creating User",
     });
+  }
+});
+
+// Edit User Page
+app.get("/:id/edit", async (req, res) => {
+  try {
+    // mongoose method to find author in database
+    // const user = await Author.findById(req.params.id);
+    res.render("edit");
+  } catch {
+    res.redirect("/");
+  }
+});
+
+// Update User
+app.put("/:id/edit", async (req, res) => {
+  let user;
+  try {
+    user = await User.findById(req.params.id);
+    user.name = req.body.name;
+    user.userName = req.body.userName;
+    user.status = req.body.status;
+    await user.save();
+    res.redirect("/");
+  } catch {
+    if (user == null) {
+      res.redirect("/");
+    }
+    res.render("edit", {
+      errorMessage: "Error editing user",
+    });
+  }
+});
+
+// Delete user
+app.delete("/:id", async (req, res) => {
+  let user;
+  const id = req.params.id;
+  const trim = id.trim();
+  try {
+    user = await User.findById(trim);
+    await user.remove();
+    res.redirect("/");
+  } catch (err) {
+    if (user == null) {
+      res.redirect("/");
+    }
+    console.log(err);
+    // res.redirect(`/authors/${author.id}`);
   }
 });
 

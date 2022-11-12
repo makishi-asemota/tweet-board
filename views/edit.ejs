@@ -1,0 +1,21 @@
+<h2>Edit User</h2>
+<form action="?_method=PUT" method="POST">
+    <%- include('partials/error') %> 
+    <div>
+      <div>
+        <label>Create Username:</label>
+        <input type="text" name="userName" />
+      </div>
+      
+      <div>
+        <label>Password:</label>
+        <input type="text" name="password" placeholder="Under 5 letter nouns please."/>
+      </div>
+      
+      <div>
+        <label>Status:</label>
+        <input type="textarea" name="status"/>
+      </div>
+    <a href="/">Cancel</a>
+    <button type="submit">Update</button>
+</form>

@@ -3,9 +3,10 @@
     <% users.forEach(user => { %>
       <div class="messageContainer">
         <h2><%= user.userName %></h2>
-        <p><%= user.name %></p>
-        <p><%= user.birthday %></p>
         <p><%= user.status %></p>
+        <a href="/<%= user.id %>/edit">Edit</a>
+        <!-- <%- include('edit', ) %> -->
+        <%- include('partials/deleteForm', {url: `/${user.id}`}) %>
       </div>
    <% }); %> 
    <a href="/new">Add New User</a>

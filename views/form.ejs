@@ -1,20 +1,9 @@
-<form method="POST" action="/new" enctype="multipart/form-data" >
+<form method="POST" action="/new" >
   <h2>Welcome New User!</h2>
-
-  <div>
-    <label>Name:</label>
-    <input type="text" name="name" value="<%= user.name %>"/>
-  </div>
-  
+  <%- include('partials/error') %> 
   <div>
     <label>Create Username:</label>
     <input type="text" name="userName" value="<%= user.userName %>"/>
-  </div>
-  
-  <div>
-    <label>Birthday</label>
-    <input type="date" name="birthday"
-        value="<%= user.birthday == null ? '' : user.birthday.toISOString().split('T')[0] %>">
   </div>
   
   <div>
@@ -24,8 +13,9 @@
   
   <div>
     <label>Status:</label>
-    <input type="textarea" name="messageText" value="<%= user.status %>"/>
+    <input type="textarea" name="status" value="<%= user.status %>"/>
   </div>
   
+  <a href="/">Cancel</a>
   <button type="submit">Submit</button>
 </form>
