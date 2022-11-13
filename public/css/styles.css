@@ -30,3 +30,42 @@ a {
   display: flex;
   justify-content: space-evenly;
 }
+
+.addUser {
+  padding-left: 30%;
+}
+
+.vstack {
+  display: flex;
+  align-items: center;
+}
+
+.eachUserContainer {
+  width: 60%;
+}
+
+.eachUser {
+  padding: 1em;
+}
+
+.edit {
+  margin-left: 8em;
+  margin-top: -0.5em;
+}
+
+.userName {
+  padding-bottom: 0.2em;
+  color: white;
+}
+
+.status {
+  width: 80%;
+  height: 6vh;
+  padding-left: 1em;
+  padding-top: 0.5em;
+  margin-left: 2.8em;
+  outline-style: inset;
+  outline-width: 0.2em;
+  outline-color: whitesmoke;
+  color: white;
+}

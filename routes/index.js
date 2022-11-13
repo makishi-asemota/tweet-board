@@ -47,8 +47,8 @@ app.post("/new", async (req, res) => {
 app.get("/:id/edit", async (req, res) => {
   try {
     // mongoose method to find author in database
-    // const user = await Author.findById(req.params.id);
-    res.render("edit");
+    const user = await User.find({});
+    res.render("edit", { user: user });
   } catch {
     res.redirect("/");
   }
@@ -70,12 +70,13 @@ app.put("/:id/edit", async (req, res) => {
     }
     res.render("edit", {
       errorMessage: "Error editing user :(",
+      user: user,
     });
   }
 });
 
 // Delete user
-app.delete("/:id", async (req, res) => {
+app.delete("/:id/edit", async (req, res) => {
   let user;
   const id = req.params.id;
   const trim = id.trim();
