@@ -6,20 +6,28 @@
   <title>tweet-bot</title>
 </head>
 <body body class="bg-warning">
-  <div class="d-flex align-items-center">
-    <h1 style='padding: 0.5em;' class="text-white">#tweet-bot</h1>
-    <div class="text-white fw-bold addUser">
-      New Here? Come join and speak your mind!
-      <button class="btn btn-info" type="submit"><a href="/new">Add New User</a></button>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1 style='padding: 0.5em;' class="text-white">#tweet-bot</h1>
+      </div>
+      <div class="col d-flex addUser">
+        <div class="text-white fw-bold ">
+          New Here? Come join and speak your mind!
+          <button class="btn btn-info" type="submit"><a href="/new">Add New User</a></button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="vstack gap-5">
     <% users.forEach(user => { %>
       <div class="rounded-pill bg-info border border-white eachUserContainer">
         <div class="eachUser">
-          <div class="d-flex justify-content-evenly align-items-center">
+          <div class="d-flex justify-content-flexstart align-items-center">
             <h2 class="userName">@<%= user.userName %></h2>
-            <a href="/<%= user.id %>/edit">Edit User</a>
+            <div class="editUser" >
+              <button type="button" class="btn btn-sm btn-outline-warning"><a href="/<%= user.id %>/password">Edit</a></button>
+            </div>
           </div>
           <div class="rounded-pill fst-italic status">
             <p><%= user.status %></p>

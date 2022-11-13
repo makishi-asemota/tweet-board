@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/styles.css" />
+
+<html>
+    <head>
+        <body class="bg-warning userPage">
+            <div class="bg-light text-dark rounded formContainer">
+                <form method="POST" action="?_method=DELETE" class="userForm" >
+                  <h2 class="text-center text-primary formTitle">Click delete to DELETE User FOREVER!</h2>
+               
+
+                  <div class="col-12 text-center buttons">
+                    <button class="btn btn-danger" type="submit"><a href="/">Cancel</a></button>
+
+                    <!-- <form method="POST" action="?_method=DELETE"> -->
+                        <button  type="submit">Delete</button>
+                    <!-- </form> -->
+                  </div>
+          
+                  <div class="text-center">
+                    <h4 class="text-danger"><%- include('partials/error') %></h4>
+                  </div>
+                </form>
+              </div>
+            </body>
+        </body>
+    </head>
+    
+</html>

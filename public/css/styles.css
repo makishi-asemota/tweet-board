@@ -31,10 +31,6 @@ a {
   justify-content: space-evenly;
 }
 
-.addUser {
-  padding-left: 30%;
-}
-
 .vstack {
   display: flex;
   align-items: center;
@@ -42,6 +38,7 @@ a {
 
 .eachUserContainer {
   width: 60%;
+  height: 20%;
 }
 
 .eachUser {
@@ -56,6 +53,11 @@ a {
 .userName {
   padding-bottom: 0.2em;
   color: white;
+  padding-left: 7%;
+}
+
+.editUser {
+  margin-left: 20%;
 }
 
 .status {
@@ -68,4 +70,14 @@ a {
   outline-width: 0.2em;
   outline-color: whitesmoke;
   color: white;
+}
+
+.container {
+  padding-bottom: 2%;
+}
+
+@media (min-width: 600px) {
+  .addUser {
+    text-align: center;
+  }
 }

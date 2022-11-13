@@ -43,16 +43,59 @@ app.post("/new", async (req, res) => {
   }
 });
 
+// Password Authentication route
+app.get("/:id/password", async (req, res) => {
+  res.render("password");
+});
+
+// Check if password is correct
+app.post("/:id/password", async (req, res) => {
+  let user;
+  try {
+    user = await User.findOne({ password: req.body.password });
+    if (user.password == req.body.password) {
+      res.redirect(`/${user.id}/edit`);
+    }
+  } catch {
+    res.render("password", {
+      errorMessage: "Wrong Password LoL",
+    });
+  }
+});
+
 // Edit User Page
 app.get("/:id/edit", async (req, res) => {
+  let user;
   try {
     // mongoose method to find author in database
-    const user = await User.find({});
+    user = await User.findById(req.params.id);
     res.render("edit", { user: user });
   } catch {
     res.redirect("/");
   }
 });
+
+// Delete Page
+app.get("/:id/edit/delete", async (req, res) => {
+  let user;
+  user = await User.findById(req.params.id);
+  res.render("delete", { user: user });
+});
+
+// Delete User
+// app.post("/:id/edit/delete", async (req, res) => {
+//   let user;
+//   try {
+//     user = await User.findOne({ password: req.body.password });
+//     if (user.password == req.body.password) {
+//       res.redirect("/");
+//     }
+//   } catch {
+//     res.render("delete", {
+//       errorMessage: "Wrong Password LoL",
+//     });
+//   }
+// });
 
 // Update User
 app.put("/:id/edit", async (req, res) => {
@@ -75,22 +118,23 @@ app.put("/:id/edit", async (req, res) => {
   }
 });
 
-// Delete user
-app.delete("/:id/edit", async (req, res) => {
-  let user;
+// Delete user method
+app.delete("/:id/edit/delete", async (req, res) => {
   const id = req.params.id;
-  const trim = id.trim();
-  try {
-    user = await User.findById(trim);
-    await user.remove();
-    res.redirect("/");
-  } catch (err) {
-    if (user == null) {
-      res.redirect("/");
-    }
-    console.log(err);
-    // res.redirect(`/authors/${author.id}`);
-  }
+  const query = { _id: id };
+  const result = await User.deleteOne(query);
+  res.redirect("/");
+  // let user;
+  // try {
+  //   user = await User.findById(req.params.id);
+  //   await user.remove();
+  //   res.redirect("/");
+  // } catch (err) {
+  //   if (user == null) {
+  //     res.redirect("/");
+  //   }
+  //   console.log(err);
+  // }
 });
 
 module.exports = app;

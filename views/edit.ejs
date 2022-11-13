@@ -23,7 +23,7 @@
         <div class="col-12 text-center buttons">
           <button class="btn btn-danger" type="submit"><a href="/">Cancel</a></button>
           <button class="btn btn-primary" type="submit">Save User</button>
-          <%- include('partials/deleteForm', {url: `/${user.id}/edit`}) %>
+          <button class="btn btn-sm btn-outline-danger"><a href="/<%= user.id %>/edit/delete">Delete</a></button>
         </div>
 
         <div class="text-center">
