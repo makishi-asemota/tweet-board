@@ -5,7 +5,7 @@
 
   <body class="bg-warning userPage">
     <div class="bg-light text-dark rounded formContainer">
-      <form method="POST" action="/new" class="userForm" >
+      <form method="POST" action="/new" enctype="multipart/form-data" class="userForm" >
         <h2 class="text-center text-primary formTitle">Welcome New User!</h2>
         
         <!-- <div>
@@ -39,7 +39,7 @@
 
         <div class="mb-3">
           <label for="formFile" class="form-label">Profile Image</label>
-          <input class="form-control" type="file" id="formFile">
+          <input class="form-control" type="file" id="formFile" name="image">
         </div>
       
         <div class="col-12 text-center buttons">

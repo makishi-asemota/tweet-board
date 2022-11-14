@@ -13,6 +13,11 @@ a {
   color: white;
 }
 
+.profileImage {
+  height: 50px;
+  width: 50px;
+}
+
 .formContainer {
   width: 60%;
   height: 70%;

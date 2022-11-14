@@ -1,10 +1,12 @@
-<link rel="stylesheet" href="/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/css/styles.css" />
-
 <html>
+  <head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+    <title>tweet-bot</title>
+  </head>
   <body class="bg-warning userPage">
     <div class="bg-light text-dark rounded formContainer">
-      <form method="POST" action="?_method=PUT" class="userForm">
+      <form method="POST" action="/<%= user.id %>?_method=PUT" enctype="multipart/form-data" class="userForm">
         <h2 class="text-center text-primary formTitle">Edit User</h2>
         
         <div class="input-group mb-3">
@@ -19,6 +21,11 @@
         <div class="mb-3">
           <textarea name="status" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Something new happened, tell me!"></textarea>
         </div>
+
+        <div class="mb-3">
+          <label for="formFile" class="form-label">New Profile Image</label>
+          <input class="form-control" type="file" id="formFile" name="image">
+        </div>
       
         <div class="col-12 text-center buttons">
           <button class="btn btn-danger" type="submit"><a href="/">Cancel</a></button>
@@ -32,4 +39,5 @@
       </form>
     </div>
   </body>
+  
 </html>

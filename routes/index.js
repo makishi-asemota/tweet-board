@@ -1,9 +1,16 @@
 const express = require("express");
 const multer = require("multer");
-const upload = multer();
-const { appendFile } = require("fs");
-const path = require("path");
 const User = require("../models/users");
+const fs = require("fs");
+const path = require("path");
+const uploadPath = path.join("public", User.coverImageBasePath);
+const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
+const upload = multer({
+  dest: uploadPath,
+  fileFilter: (req, file, callback) => {
+    callback(null, imageMimeTypes.includes(file.mimetype));
+  },
+});
 
 const app = express();
 app.use(express.json());
@@ -25,17 +32,22 @@ app.get("/new", function (req, res) {
 });
 
 //Create User Route
-app.post("/new", async (req, res) => {
+app.post("/new", upload.single("image"), async (req, res) => {
+  const fileName = req.file != null ? req.file.filename : null;
   const user = new User({
     userName: req.body.userName,
     password: req.body.password,
+    profileImage: fileName,
     status: req.body.status,
   });
-
+  // saveProfileImage(user, req.body.image);
   try {
     const newUser = await user.save();
     res.redirect("/");
   } catch {
+    if (user.coverImageName != null) {
+      removeProfileImage(user.coverImageName);
+    }
     res.render("form", {
       user: user,
       errorMessage: "Error creating User :(",
@@ -65,10 +77,9 @@ app.post("/:id/password", async (req, res) => {
 
 // Edit User Page
 app.get("/:id/edit", async (req, res) => {
-  let user;
   try {
     // mongoose method to find author in database
-    user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id);
     res.render("edit", { user: user });
   } catch {
     res.redirect("/");
@@ -82,39 +93,27 @@ app.get("/:id/edit/delete", async (req, res) => {
   res.render("delete", { user: user });
 });
 
-// Delete User
-// app.post("/:id/edit/delete", async (req, res) => {
-//   let user;
-//   try {
-//     user = await User.findOne({ password: req.body.password });
-//     if (user.password == req.body.password) {
-//       res.redirect("/");
-//     }
-//   } catch {
-//     res.render("delete", {
-//       errorMessage: "Wrong Password LoL",
-//     });
-//   }
-// });
-
 // Update User
-app.put("/:id/edit", async (req, res) => {
+app.put("/:id", async (req, res) => {
   let user;
+  const fileName = req.file != null ? req.file.filename : null;
   try {
     user = await User.findById(req.params.id);
-    user.name = req.body.name;
     user.userName = req.body.userName;
+    user.password = req.body.password;
     user.status = req.body.status;
+    user.profileImage = fileName;
     await user.save();
     res.redirect("/");
-  } catch {
-    if (user == null) {
-      res.redirect("/");
+  } catch (err) {
+    console.log(err);
+    if (user !== null) {
+      res.render("edit", {
+        errorMessage: "Error editing user :(",
+        user: user,
+      });
     }
-    res.render("edit", {
-      errorMessage: "Error editing user :(",
-      user: user,
-    });
+    res.redirect("/");
   }
 });
 
@@ -136,5 +135,12 @@ app.delete("/:id/edit/delete", async (req, res) => {
   //   console.log(err);
   // }
 });
+
+// Remove profile image from database if there is error
+function removeProfileImage(fileName) {
+  fs.unlink(path.join(uploadPath, fileName), (err) => {
+    if (err) console.error(err);
+  });
+}
 
 module.exports = app;

@@ -24,6 +24,7 @@
       <div class="rounded-pill bg-info border border-white eachUserContainer">
         <div class="eachUser">
           <div class="d-flex justify-content-flexstart align-items-center">
+            <img class="profileImage" src="<%= user.coverImagePath %> ">
             <h2 class="userName">@<%= user.userName %></h2>
             <div class="editUser" >
               <button type="button" class="btn btn-sm btn-outline-warning"><a href="/<%= user.id %>/password">Edit</a></button>

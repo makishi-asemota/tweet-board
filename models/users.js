@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const path = require("path");
+
+const coverImageBasePath = "images/users";
 
 const userSchema = new mongoose.Schema({
   password: {
@@ -11,10 +14,10 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
 
-  //   profileImage: {
-  //     type: String,
-  //     required: true,
-  //   },
+  profileImage: {
+    type: String,
+    required: true,
+  },
 
   status: {
     type: String,
@@ -22,4 +25,12 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// Append image to file in folder
+userSchema.virtual("coverImagePath").get(function () {
+  if (this.profileImage != null) {
+    return path.join("/", coverImageBasePath, this.profileImage);
+  }
+});
+
 module.exports = mongoose.model("User", userSchema);
+module.exports.coverImageBasePath = coverImageBasePath;
