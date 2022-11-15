@@ -5,16 +5,13 @@
     <head>
         <body class="bg-warning userPage">
             <div class="bg-light text-dark rounded formContainer">
-                <form method="POST" action="?_method=DELETE" class="userForm" >
-                  <h2 class="text-center text-primary formTitle">Click delete to DELETE User FOREVER!</h2>
+                <form method="POST" action="/<%= user.id %>?_method=DELETE" class="userForm" >
+                  <h2 class="text-center text-primary formTitle">Click 'DELETE' to Remove User FOREVER!</h2>
                
 
                   <div class="col-12 text-center buttons">
-                    <button class="btn btn-danger" type="submit"><a href="/">Cancel</a></button>
-
-                    <!-- <form method="POST" action="?_method=DELETE"> -->
-                        <button  type="submit">Delete</button>
-                    <!-- </form> -->
+                    <button class="btn btn-primary" type="submit"><a href="/">Cancel</a></button>
+                    <button class="btn btn-danger" type="submit">DELETE</button>
                   </div>
           
                   <div class="text-center">

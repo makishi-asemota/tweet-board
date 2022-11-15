@@ -11,15 +11,15 @@
         
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">@</span>
-          <input name="userName" type="text" class="form-control" placeholder="New Username" aria-label="Username" aria-describedby="basic-addon1">
+          <input name="userName" type="text" class="form-control" placeholder="New Username" aria-label="Username" aria-describedby="basic-addon1" value="<%= user.userName %>">
         </div>
       
         <div class="mb-3">
-          <input name="password" class="form-control" id="exampleFormControlInput1" placeholder="New Password">
+          <input name="password" class="form-control" id="exampleFormControlInput1" placeholder="New Password" value="<%= user.password %>">
         </div>
       
         <div class="mb-3">
-          <textarea name="status" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Something new happened, tell me!"></textarea>
+          <textarea name="status" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Something new happened, tell me!" value="<%= user.status %>"></textarea>
         </div>
 
         <div class="mb-3">

@@ -3,7 +3,7 @@ const multer = require("multer");
 const User = require("../models/users");
 const fs = require("fs");
 const path = require("path");
-const uploadPath = path.join("public", User.coverImageBasePath);
+const uploadPath = path.join("public", User.profileImageBasePath);
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif"];
 const upload = multer({
   dest: uploadPath,
@@ -40,13 +40,12 @@ app.post("/new", upload.single("image"), async (req, res) => {
     profileImage: fileName,
     status: req.body.status,
   });
-  // saveProfileImage(user, req.body.image);
   try {
     const newUser = await user.save();
     res.redirect("/");
   } catch {
-    if (user.coverImageName != null) {
-      removeProfileImage(user.coverImageName);
+    if (user.profileImage != null) {
+      removeProfileImage(user.profileImage);
     }
     res.render("form", {
       user: user,
@@ -94,20 +93,20 @@ app.get("/:id/edit/delete", async (req, res) => {
 });
 
 // Update User
-app.put("/:id", async (req, res) => {
+app.put("/:id", upload.single("image"), async (req, res) => {
   let user;
-  const fileName = req.file != null ? req.file.filename : null;
   try {
     user = await User.findById(req.params.id);
     user.userName = req.body.userName;
     user.password = req.body.password;
+    user.profileImage = req.file.filename;
     user.status = req.body.status;
-    user.profileImage = fileName;
     await user.save();
     res.redirect("/");
   } catch (err) {
     console.log(err);
     if (user !== null) {
+      removeProfileImage(user.profileImage);
       res.render("edit", {
         errorMessage: "Error editing user :(",
         user: user,
@@ -118,22 +117,18 @@ app.put("/:id", async (req, res) => {
 });
 
 // Delete user method
-app.delete("/:id/edit/delete", async (req, res) => {
-  const id = req.params.id;
-  const query = { _id: id };
-  const result = await User.deleteOne(query);
-  res.redirect("/");
-  // let user;
-  // try {
-  //   user = await User.findById(req.params.id);
-  //   await user.remove();
-  //   res.redirect("/");
-  // } catch (err) {
-  //   if (user == null) {
-  //     res.redirect("/");
-  //   }
-  //   console.log(err);
-  // }
+app.delete("/:id", async (req, res) => {
+  let user;
+  try {
+    user = await User.findById(req.params.id);
+    await user.remove();
+    res.redirect("/");
+  } catch (err) {
+    if (user == null) {
+      res.redirect("/");
+    }
+    console.log(err);
+  }
 });
 
 // Remove profile image from database if there is error

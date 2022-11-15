@@ -14,13 +14,17 @@ a {
 }
 
 .profileImage {
-  height: 50px;
-  width: 50px;
+  width: 5vw;
+  margin-left: 3%;
+}
+
+.topUser {
+  padding-bottom: 0.5em;
 }
 
 .formContainer {
   width: 60%;
-  height: 70%;
+  padding: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,20 +60,18 @@ a {
 }
 
 .userName {
-  padding-bottom: 0.2em;
   color: white;
-  padding-left: 7%;
+  margin-left: 2%;
 }
 
 .editUser {
-  margin-left: 20%;
+  margin-left: 15%;
 }
 
 .status {
   width: 80%;
-  height: 6vh;
+  height: 3em;
   padding-left: 1em;
-  padding-top: 0.5em;
   margin-left: 2.8em;
   outline-style: inset;
   outline-width: 0.2em;
@@ -81,7 +83,7 @@ a {
   padding-bottom: 2%;
 }
 
-@media (min-width: 600px) {
+@media screen and (min-width: 600px) {
   .addUser {
     text-align: center;
   }
