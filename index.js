@@ -58,6 +58,9 @@ app.use("/users", usersRouter);
 // });
 
 //start server
-app.listen(process.env.PORT || "https://tweet-board.vercel.app/");
+app.listen(
+  process.env.PORT ||
+    "https://tweet-board-i4wyauf8c-makishi-asemota.vercel.app/"
+);
 
 module.exports = app;
