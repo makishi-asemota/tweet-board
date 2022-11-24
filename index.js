@@ -58,6 +58,6 @@ app.use("/users", usersRouter);
 // });
 
 //start server
-app.listen(process.env.PORT || 3600);
+app.listen(process.env.PORT || "https://tweet-board.vercel.app/");
 
 module.exports = app;
